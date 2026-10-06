@@ -213,14 +213,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <button
                 type="button"
                 onClick={onOpenFirebasePanel}
-                className="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 text-orange-950 font-bold text-xs border border-orange-300 shadow-2xs transition-all flex items-center gap-2 cursor-pointer active:scale-95"
+                className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 font-semibold text-xs border border-slate-200/90 hover:border-slate-300 shadow-2xs transition-all flex items-center gap-2 cursor-pointer active:scale-98"
                 title="Comprobar enlace activo con la base de datos Firestore"
               >
-                <div className="relative">
-                  <Database className="w-4 h-4 text-orange-600" />
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 absolute -top-0.5 -right-0.5 animate-pulse" />
-                </div>
-                <span>Estado Firebase</span>
+                <Database className="w-4 h-4 text-emerald-700" />
+                <span className="font-bold text-slate-800">Base de Datos</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
               </button>
             )}
 
@@ -264,17 +262,23 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
 
         {/* Alerta Prórrogas Art. 62 */}
-        <div className={`border rounded-xl p-5 space-y-3 shadow-xs ${
+        <div className={`border rounded-xl p-5 space-y-3 shadow-xs transition-colors ${
           contratosConAlertaProrroga > 0
-            ? 'bg-amber-50/70 border-amber-300'
+            ? 'bg-amber-50/70 border-amber-300/80'
             : 'bg-white border-slate-200'
         }`}>
           <div className="flex items-center justify-between">
             <span className="text-xs text-slate-500 font-medium uppercase tracking-wider">Prórrogas (Art. 62 LOTTT)</span>
             {contratosConAlertaProrroga > 0 ? (
-              <span className="flex h-2.5 w-2.5 rounded-full bg-amber-600 animate-ping" />
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold">
+                <ShieldAlert className="w-3 h-3 text-amber-700" />
+                <span>Tope Legal</span>
+              </span>
             ) : (
-              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-600" />
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-semibold">
+                <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                <span>En Regla</span>
+              </span>
             )}
           </div>
           <div>

@@ -174,7 +174,7 @@ export const FirebaseStatusModal: React.FC<FirebaseStatusModalProps> = ({
                         : 'Desconectado o en Modo Local'}
                     </span>
                     {connectionStatus === 'connected' && (
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-600" />
                     )}
                   </div>
                   <div className="text-xs text-slate-600 flex items-center gap-3 mt-0.5">

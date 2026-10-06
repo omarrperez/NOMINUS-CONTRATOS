@@ -13,7 +13,9 @@ import {
   Cloud,
   Bot,
   Sparkles,
-  Building2
+  Building2,
+  Database,
+  CheckCircle2
 } from 'lucide-react';
 import { formatVES } from '../utils/lotttCalculations';
 
@@ -56,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="bg-gradient-to-r from-amber-50 via-orange-50/40 to-amber-50 px-4 py-1.5 border-b border-amber-200/60 text-xs text-slate-700">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+            <span className="flex h-2 w-2 rounded-full bg-emerald-600" />
             <span className="font-semibold text-slate-800">Gaceta Oficial & BCV:</span>
             <span className="text-slate-600">Tasa Oficial:</span>
             <div className="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded border border-amber-300 font-mono text-amber-900 shadow-2xs">
@@ -77,18 +79,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="flex items-center gap-2.5 text-slate-600 text-[11px]">
-            {/* Live Firestore DB Badge - Interactive Button */}
+            {/* Live Firestore DB Badge - Limpio, estático y sobrio */}
             <button
               type="button"
               onClick={onOpenFirebasePanel}
-              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-gradient-to-r from-orange-100/90 to-amber-100/90 hover:from-orange-200/90 hover:to-amber-200/90 text-orange-950 font-medium border border-orange-300 font-mono shadow-2xs transition-all cursor-pointer active:scale-95 group"
-              title="Haga clic para abrir el panel de diagnóstico y estado de Firebase Firestore"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-200/90 hover:border-slate-300 font-sans shadow-2xs transition-all cursor-pointer active:scale-98"
+              title="Haga clic para ver el estado y diagnóstico de la base de datos Firestore"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0" />
-              <span className="font-bold">Firestore DB Conectada</span>
-              <span className="text-[10px] text-orange-700 bg-white/80 px-1 py-0.2 rounded border border-orange-200">
-                Ver Panel
-              </span>
+              <Database className="w-3.5 h-3.5 text-emerald-700" />
+              <span className="font-semibold text-slate-800 text-[11px]">Firestore Online</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
             </button>
             <span aria-hidden="true" className="hidden sm:inline text-amber-300">·</span>
             <span className="hidden sm:inline font-medium">LOTTT Art. 59</span>
