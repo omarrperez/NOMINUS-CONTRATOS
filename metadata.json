@@ -1,0 +1,6 @@
+{
+  "name": "Nominus Contratos",
+  "description": "Plataforma LegalTech de contratación laboral digital, gestión documental y cumplimiento LOTTT, LOPCYMAT y firmas electrónicas para empresas en Venezuela.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,127 @@
+{
+  "entities": {
+    "Company": {
+      "title": "Company",
+      "description": "Entidad de trabajo mercantil o patrono en Venezuela",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Identificador único de la empresa" },
+        "denominacionSocial": { "type": "string", "description": "Razón social completa" },
+        "alias": { "type": "string", "description": "Nombre comercial o abreviado" },
+        "rif": { "type": "string", "description": "RIF venezolano (ej. J-12345678-9)" },
+        "registroMercantil": { "type": "string", "description": "Datos de registro mercantil" },
+        "domicilioFiscal": { "type": "string", "description": "Dirección fiscal y operativa" },
+        "representanteNombre": { "type": "string", "description": "Nombre del representante legal" },
+        "representanteCI": { "type": "string", "description": "Cédula de identidad del representante" },
+        "representanteCargo": { "type": "string", "description": "Cargo estatutario del representante" },
+        "representanteFacultad": { "type": "string", "description": "Facultad estatutaria de representación" },
+        "rnetNumero": { "type": "string", "description": "Número de inscripción RNET" },
+        "ivssPatronal": { "type": "string", "description": "Número patronal IVSS" },
+        "incesNumero": { "type": "string", "description": "Número de aportante INCES" },
+        "banavihNumero": { "type": "string", "description": "Número de aportante FAOV/BANAVIH" },
+        "actividadEconomica": { "type": "string", "description": "Ramo o actividad comercial" },
+        "colorTheme": { "type": "string", "description": "Tema visual de la empresa" },
+        "fechaRegistro": { "type": "string", "description": "Fecha de registro en el sistema" },
+        "activo": { "type": "boolean", "description": "Estatus activo" }
+      },
+      "required": ["id", "denominacionSocial", "rif"]
+    },
+    "LaborContract": {
+      "title": "LaborContract",
+      "description": "Expediente de contrato laboral digital conforme a la LOTTT y LOPCYMAT",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Identificador único del contrato" },
+        "codigoExpediente": { "type": "string", "description": "Código patronal de expediente (ej. NOM-2026-0001)" },
+        "fechaCreacion": { "type": "string", "description": "Fecha de redacción" },
+        "fechaInicioRelacion": { "type": "string", "description": "Fecha de inicio del vínculo laboral" },
+        "modalidad": { "type": "string", "description": "Modalidad de contratación (indeterminado, determinado, obra)" },
+        "fechaCulminacion": { "type": "string", "description": "Fecha término si es determinado" },
+        "duracionMeses": { "type": "number", "description": "Duración pactada en meses" },
+        "causalArt64": { "type": "string", "description": "Causal taxativa de temporalidad Art. 64 LOTTT" },
+        "justificacionCausalArt64": { "type": "string", "description": "Sustento fáctico de la causal Art. 64" },
+        "numeroProrroga": { "type": "number", "description": "Contador de prórrogas Art. 62 LOTTT" },
+        "cargo": { "type": "string", "description": "Denominación del cargo u oficio" },
+        "clasificacion": { "type": "string", "description": "Clasificación laboral" },
+        "descripcionFunciones": { "type": "string", "description": "Atribuciones y descripción detallada" },
+        "lugarPrestacion": { "type": "string", "description": "Lugar geográfico de ejecución" },
+        "domicilioEspecialConvenido": { "type": "string", "description": "Circunscripción judicial especial convenida" },
+        "tipoJornada": { "type": "string", "description": "Tipo de jornada" },
+        "horasSemanales": { "type": "number", "description": "Límite legal semanal de horas" },
+        "horarioDetallado": { "type": "string", "description": "Detalle de días y horas de labores" },
+        "diasDescanso": { "type": "string", "description": "Dos días continuos de descanso semanal" },
+        "empresaId": { "type": "string", "description": "ID de la empresa patronal vinculada" },
+        "empresa": { "type": "object", "description": "Snapshot de datos de la empresa patronal" },
+        "trabajador": { "type": "object", "description": "Datos del trabajador contratado" },
+        "remuneracion": { "type": "object", "description": "Estructura salarial indexada o mixta" },
+        "aplicaConvencionColectiva": { "type": "boolean", "description": "Aplica convención colectiva" },
+        "incluyePeriodoPrueba": { "type": "boolean", "description": "Incluye periodo de prueba de 90 días" },
+        "diasPrueba": { "type": "number", "description": "Días de prueba" },
+        "lopcymat": { "type": "object", "description": "Notificación de riesgos y salud laboral NT-04-2023" },
+        "dobleEjemplarEmitido": { "type": "boolean", "description": "Constancia de doble ejemplar Art. 59 N° 14" },
+        "constanciaEntregaFirmada": { "type": "boolean", "description": "Acuse de recibo suscrito" },
+        "status": { "type": "string", "description": "Estado de firmas (pendiente_firma, firmado_patrono, firmado_trabajador, firmado_ambos)" },
+        "firmaPatrono": { "type": "object", "description": "Firma electrónica patronal" },
+        "firmaTrabajador": { "type": "object", "description": "Firma electrónica del empleado" },
+        "auditTrail": { "type": "object", "description": "Certificado de auditoría SUSCERTE con hash SHA-256" },
+        "historialAdendas": { "type": "array", "description": "Historial de modificaciones salariales que preservan antigüedad" }
+      },
+      "required": ["id", "codigoExpediente", "modalidad", "cargo", "empresa", "trabajador", "remuneracion"]
+    },
+    "CloudDocument": {
+      "title": "CloudDocument",
+      "description": "Documento laboral resguardado en bóveda documental en la nube",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Identificador del documento" },
+        "nombre": { "type": "string", "description": "Nombre de archivo" },
+        "tipo": { "type": "string", "description": "Tipo de documento" },
+        "tipoDescripcion": { "type": "string", "description": "Descripción formal del documento" },
+        "contractId": { "type": "string", "description": "ID del contrato relacionado" },
+        "codigoExpediente": { "type": "string", "description": "Código del expediente" },
+        "empresaId": { "type": "string", "description": "ID de la empresa patronal" },
+        "empresaNombre": { "type": "string", "description": "Nombre de la empresa" },
+        "empleadoNombre": { "type": "string", "description": "Nombre completo del trabajador" },
+        "empleadoCedula": { "type": "string", "description": "Cédula del trabajador" },
+        "fechaSubida": { "type": "string", "description": "Fecha de archivo en bóveda" },
+        "tamanioKb": { "type": "number", "description": "Tamaño en kilobytes" },
+        "formato": { "type": "string", "description": "Formato del archivo (PDF, DOCX)" },
+        "sha256Hash": { "type": "string", "description": "Hash criptográfico SHA-256" },
+        "estadoSeguridad": { "type": "string", "description": "Estado de certificación" },
+        "nubeProvider": { "type": "string", "description": "Proveedor de respaldo cloud" },
+        "etiquetas": { "type": "array", "description": "Etiquetas de clasificación" },
+        "notas": { "type": "string", "description": "Notas jurídicas y observaciones" }
+      },
+      "required": ["id", "nombre", "tipo", "empleadoNombre", "empleadoCedula", "sha256Hash"]
+    },
+    "AppConfig": {
+      "title": "AppConfig",
+      "description": "Configuración global de la aplicación (ej. tasa oficial BCV)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "ID de configuración (ej. global)" },
+        "bcvRate": { "type": "number", "description": "Tasa oficial de cambio BCV USD/VES" },
+        "lastUpdated": { "type": "string", "description": "Última fecha de actualización" }
+      },
+      "required": ["id", "bcvRate"]
+    }
+  },
+  "firestore": {
+    "/companies/{companyId}": {
+      "schema": { "$ref": "#/entities/Company" },
+      "description": "Colección de entidades de trabajo mercantiles patronales (Multi-Empresa)"
+    },
+    "/contracts/{contractId}": {
+      "schema": { "$ref": "#/entities/LaborContract" },
+      "description": "Expedientes y contratos de trabajo individuales bajo la LOTTT"
+    },
+    "/cloudDocuments/{docId}": {
+      "schema": { "$ref": "#/entities/CloudDocument" },
+      "description": "Bóveda de documentos laborales digitalizados"
+    },
+    "/settings/{configId}": {
+      "schema": { "$ref": "#/entities/AppConfig" },
+      "description": "Configuraciones globales como tasa oficial BCV y parámetros laborales"
+    }
+  }
+}

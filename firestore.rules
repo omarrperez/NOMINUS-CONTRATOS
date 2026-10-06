@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if string has valid length
+    function isValidString(val, minLen, maxLen) {
+      return val is string && val.size() >= minLen && val.size() <= maxLen;
+    }
+
+    // Validation for companies
+    function isValidCompany(data) {
+      return data.id is string && data.id.size() <= 128
+        && isValidString(data.denominacionSocial, 2, 300)
+        && isValidString(data.rif, 3, 30);
+    }
+
+    // Validation for contracts
+    function isValidContract(data) {
+      return data.id is string && data.id.size() <= 128
+        && isValidString(data.codigoExpediente, 2, 60)
+        && isValidString(data.modalidad, 2, 50)
+        && isValidString(data.cargo, 2, 200)
+        && data.empresa is map
+        && data.trabajador is map
+        && data.remuneracion is map;
+    }
+
+    // Validation for cloud documents
+    function isValidCloudDoc(data) {
+      return data.id is string && data.id.size() <= 128
+        && isValidString(data.nombre, 2, 255)
+        && isValidString(data.tipo, 2, 60)
+        && isValidString(data.empleadoNombre, 2, 200)
+        && isValidString(data.empleadoCedula, 2, 30);
+    }
+
+    // Validation for settings
+    function isValidSetting(data) {
+      return data.id is string
+        && (data.bcvRate is number || data.bcvRate is int || data.bcvRate is float);
+    }
+
+    // Companies collection
+    match /companies/{companyId} {
+      allow read: if true;
+      allow create, update: if isValidCompany(request.resource.data);
+      allow delete: if true;
+    }
+
+    // Contracts collection
+    match /contracts/{contractId} {
+      allow read: if true;
+      allow create, update: if isValidContract(request.resource.data);
+      allow delete: if true;
+    }
+
+    // Cloud Documents collection
+    match /cloudDocuments/{docId} {
+      allow read: if true;
+      allow create, update: if isValidCloudDoc(request.resource.data);
+      allow delete: if true;
+    }
+
+    // Settings collection
+    match /settings/{configId} {
+      allow read: if true;
+      allow create, update: if isValidSetting(request.resource.data);
+      allow delete: if true;
+    }
+  }
+}
